@@ -72,13 +72,13 @@ Interfaz.prototype.mostrarResultado = function (seguro, total) {
 
   switch (seguro.marca) {
     case "1":
-      marca = "Americano";
+      marca = "volskwagen";
       break;
     case "2":
-      marca = "Asiático";
+      marca = "Honda";
       break;
     case "3":
-      marca = "Europeo";
+      marca = "Audi";
       break;
   }
 
