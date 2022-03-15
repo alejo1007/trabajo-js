@@ -29,15 +29,14 @@ Seguro.prototype.cotizarSeguro = function () {
 
   //leer el año
   const diferencia = new Date().getFullYear() - this.anio;
-
-  //cada año de diferencia afeca en 5 %
-  cantidad -= (diferencia * 5 * cantidad) / 100;
+  //cada año de diferencia afeca en 3 %
+  cantidad -= (diferencia * 3 * cantidad) / 100;
   /*
-        Si el seguro es Básico * 25% más
+        Si el seguro es Básico * 30% más
         Si el seguro es Completo 50% más
     */
   if (this.tipo === "basico") {
-    cantidad *= 1.25;
+    cantidad *= 1.3;
   } else {
     cantidad *= 1.5;
   }
@@ -72,22 +71,21 @@ Interfaz.prototype.mostrarResultado = function (seguro, total) {
 
   switch (seguro.marca) {
     case "1":
-      marca = "volskwagen";
+      marca = "Americano";
       break;
     case "2":
-      marca = "Honda";
+      marca = "Asiático";
       break;
     case "3":
-      marca = "Audi";
+      marca = "Europeo";
       break;
   }
 
   //crear un div
   const div = document.createElement("div");
   //insertar la información
-
   div.innerHTML = `
-       <p class="header">Cotizador JS:</p>
+       <p class="header">Tu resumen:</p>
        <p>Marca: ${marca}</p>
        <p> Año: ${seguro.anio}</p>
        <p>Tipo: ${seguro.tipo}</p>
@@ -154,75 +152,97 @@ for (let i = max; i > min; i--) {
 }
 
 /*Saludo segun hora*/
-function saludar() {
-  var tiempo = new Date();
 
-  var hora,
-    cad = "son las ";
-
-  with (tiempo) {
-    hora = getHours();
-
-    cad += hora + ":" + getMinutes() + ":" + getSeconds();
-  }
-
-  if (hora < 12) cad = "Buenos días, " + cad;
-  else if (hora < 18) cad = "Buenas tardes, " + cad;
-  else cad = "Buenas noches, " + cad;
-
-  return cad;
-}
-class Persona {
-  constructor(nombre, apellido, edad) {
+class User {
+  constructor(nombre, email, password) {
     this.nombre = nombre;
-    this.apellido = apellido;
-    this.edad = edad;
-  }
-
-  hablar() {
-    console.log("");
+    this.email = email;
+    this.password = password;
   }
 }
 
-let personas = [];
+let usuarios = [];
 
-if (localStorage.getItem("Personas")) {
-  personas = JSON.parse(localStorage.getItem("Personas"));
+if (localStorage.getItem("Users")) {
+  usuarios = JSON.parse(localStorage.getItem("Users"));
 } else {
-  localStorage.setItem("Personas", JSON.stringify(personas));
+  localStorage.setItem("Users", JSON.stringify(usuarios));
 }
 
-let form = document.getElementById("formUser");
-let boton = document.getElementById("botonUsers");
-let div = document.getElementById("divUsers");
+let formUsers = document.getElementById("formUser");
+let botonUsers = document.getElementById("botonUsers");
+let divUsers = document.getElementById("divUsers");
 
-form.addEventListener("submit", (e) => {
+formUsers.addEventListener("submit", (e) => {
   e.preventDefault();
+  let nombre = document.getElementById("usernameID").value;
+  let email = document.getElementById("emailID").value;
+  let password = document.getElementById("passwordID").value;
+  const user = new User(nombre, email, password);
+  usuarios.push(user);
 
-  let nombre = document.getElementById("name").value;
-  let apellido = document.getElementById("apellido").value;
-  let edad = document.getElementById("edad").value;
-
-  const persona = new Persona(nombre, apellido, edad);
-  personas.push(persona);
-
-  localStorage.setItem("Personas", JSON.stringify(personas));
-  form.reset();
+  localStorage.setItem("Users", JSON.stringify(usuarios));
+  formUsers.reset();
 });
 
-boton.addEventListener("click", () => {
-  let arrayStorage = JSON.parse(localStorage.getItem("Personas"));
-  div.innerHTML = "";
+botonUsers.addEventListener("click", () => {
+  divUsers.innerHTML = "";
 
-  arrayStorage.forEach((personaEnArray, indice) => {
-    div.innerHTML += `
-          <div class="card" id="persona${indice}" style="width: 18rem;">
-              <div class="card-body">
-                  <h5 class="card-title">${personaEnArray.nombre}</h5>
-                  <p class="card-text">${personaEnArray.apellido}</p>
-                  <p class="card-text">${personaEnArray.edad}</p>
+  usuarios.forEach((usuariosEnArray, indice, array) => {
+    console.log(array);
+
+    divUsers.innerHTML += `
+          <div id="usuario${indice}" class="card border-secondary mb-3" style="max-width: 20rem;margin:10px">
+              <div class="card-header"><h4>Usuario ${usuariosEnArray.nombre}</h4></div>
+                  <div class="card-body">
+                      <p class="card-title">Email: ${usuariosEnArray.email}</p>
+                      <button id="boton${indice}" class="btn btn-danger">Eliminar</button>
+                  </div>
               </div>
-          </div>
       `;
   });
+  //usuario.nombreAtributo = nuevoAtributo
+  usuarios.forEach((usuariosEnArray, indice) => {
+    document.getElementById(`boton${indice}`).addEventListener("click", () => {
+      divUsers.removeChild(document.getElementById(`usuario${indice}`));
+      let indiceArray = usuarios.findIndex(
+        (user) => user.nombre == usuariosEnArray.nombre
+      );
+      usuarios.splice(indiceArray, 1);
+      localStorage.setItem("Users", JSON.stringify(usuarios));
+    });
+  });
+});
+
+/*-- funcion nadbar--*/
+$(document).ready(main);
+
+var contador = 1;
+
+function main() {
+  $(".menu_bar").click(function () {
+    // $('nav').toggle();
+
+    if (contador == 1) {
+      $("nav").animate({
+        left: "0",
+      });
+      contador = 0;
+    } else {
+      contador = 1;
+      $("nav").animate({
+        left: "-100%",
+      });
+    }
+  });
+}
+/*-- fin nadbar--*/
+
+/*--comienza carusell--*/
+var myCarousel = document.querySelector("#myCarousel");
+var carousel = new bootstrap.Carousel(myCarousel);
+var myCarousel = document.querySelector("#myCarousel");
+var carousel = new bootstrap.Carousel(myCarousel, {
+  interval: 2000,
+  wrap: false,
 });
