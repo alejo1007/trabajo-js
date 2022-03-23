@@ -1,3 +1,7 @@
+swal("Click on either the button or outside the modal.").then((value) => {
+  swal(`The returned value is: ${value}`);
+});
+
 //constructor
 function Seguro(marca, anio, tipo) {
   this.marca = marca;
@@ -248,5 +252,3 @@ var carousel = new bootstrap.Carousel(myCarousel, {
 });
 
 /*----- */
-
-SSwal.fire("Any fool can use a computer");
