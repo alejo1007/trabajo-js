@@ -17,13 +17,13 @@ Seguro.prototype.cotizarSeguro = function () {
 
   switch (this.marca) {
     case "1":
-      cantidad = base * 1.15;
+      cantidad = base * 1.5;
       break;
     case "2":
-      cantidad = base * 1.05;
+      cantidad = base * 2;
       break;
     case "3":
-      cantidad = base * 1.35;
+      cantidad = base * 2.5;
       break;
   }
 
@@ -32,11 +32,11 @@ Seguro.prototype.cotizarSeguro = function () {
   //cada año de diferencia afeca en 3 %
   cantidad -= (diferencia * 3 * cantidad) / 100;
   /*
-        Si el seguro es Básico * 30% más
+        Si el seguro es Básico * 40% más
         Si el seguro es Completo 50% más
     */
   if (this.tipo === "basico") {
-    cantidad *= 1.3;
+    cantidad *= 1.4;
   } else {
     cantidad *= 1.5;
   }
@@ -246,3 +246,7 @@ var carousel = new bootstrap.Carousel(myCarousel, {
   interval: 2000,
   wrap: false,
 });
+
+/*----- */
+
+SSwal.fire("Any fool can use a computer");
