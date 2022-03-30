@@ -36,74 +36,62 @@
   <body>
     <div class="container">
       <div class="row">
-        <div class="col col-md-8 mr-md-auto ml-md-auto">
+        <div class="col col-md-8 mr-md-auto ml-md-auto" >
           <div id="contenido">
-            <header>
-              <h1 class="text-center">Cotiza tu seguro JS</h1>
-            </header>
-            <div class="row contenido-formulario">
-              <div class="col col-md-10 mr-md-auto ml-md-auto">
-                <form action="#" id="cotizar-seguro">
-                  <div class="form-group">
-                    <label for="marca">Marca:</label>
-                    <select class="form-control" id="marca">
-                      <option value="">- Seleccionar -</option>
-                      <option value="1">Volkswagen</option>
-                      <option value="2">Honda</option>
-                      <option value="3">Audi</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="anio">Año:</label>
-                    <select class="form-control" id="anio"></select>
-                  </div>
-                  <fieldset class="form-group">
-                    <div class="row">
-                      <legend class="col-form-legend col-12">
-                        Tipo Seguro
-                      </legend>
-
-                      <div class="col12">
-                        <div class="form-check">
-                          <label class="form-check-label">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="tipo"
-                              value="basico"
-                              checked
-                            />
-                            Básico
-                          </label>
-                        </div>
-                        <div class="form-check">
-                          <label class="form-check-label">
-                            <input
-                              class="form-check-input"
-                              type="radio"
-                              name="tipo"
-                              value="completo"
-                            />
-                            Completo
-                          </label>
-                        </div>
-                      </div>
+                <header>
+                   <h1 class="text-center">Cotiza tu seguro de Auto</h1>
+                </header>
+                <div class="row contenido-formulario">
+                    <div class="col col-md-10 mr-md-auto ml-md-auto">
+                      <form action="#" id="cotizar-seguro">
+                        <div class="form-group">
+                           <label for="marca">Marca:</label>
+                           <select class="form-control" id="marca">
+                             <option value="">- Seleccionar -</option>
+                             <option value="1">Americano</option>
+                            <option value="2">Asiatico</option>
+                            <option value="3">Europeo</option>
+                          </select>
+                       </div>
+                                    <div class="form-group">
+                                            <label for="anio">Año:</label>
+                                            <select class="form-control" id="anio">
+                                                
+                                            </select>
+                                    </div>
+                                    <fieldset class="form-group">
+                                        <div class="row">
+                                             <legend class="col-form-legend col-12">Tipo Seguro</legend>
+    
+                                          <div class="col12">
+                                              <div class="form-check">
+                                                <label class="form-check-label">
+                                                  <input class="form-check-input" type="radio" name="tipo" value="basico" checked>
+                                                  Básico
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                  <input class="form-check-input" type="radio" name="tipo" value="completo">
+                                                  Completo
+                                                </label>
+                                            </div>
+                                          </div>
+                                        </div>
+                                  </fieldset>
+    
+                              <div id="cargando">
+                                  <img src="img/spinner.gif">
+                              </div>
+                              <div id="resultado"></div>
+                              <div class="form-group">
+                                      <button type="submit" class="btn btn-raised btn-primary">Cotizar
+                                      </button>
+                              </div>
+                      </form> 
                     </div>
-                  </fieldset>
-
-                  <div id="cargando">
-                    <img src="img/spinner.gif" />
-                  </div>
-                  <div id="resultado"></div>
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-raised btn-primary">
-                      Cotizar
-                    </button>
-                  </div>
-                </form>
               </div>
-            </div>
-          </div>
+          </div> <!--#contenido-->
         </div>
       </div>
     </div>
@@ -127,11 +115,18 @@
         <input type="checkbox" name="checkboxInput" id="checkboxId" />
         <button type="submit" class="btn btn-dark">Crear Usuario</button>
       </form>
-      <br /><br />
+      <br />
+      <br />
       <button id="botonUsers" class="btn btn-secondary">Mostrar Usuarios</button
       ><br />
       <div id="divUsers" class="row"></div>
     </div>
+    <br>
+    <br>
+    <button id="botonDolar">Cargar cotizacion Dolar</button><br>
+    <div id="divDolar"></div><br>
+
+
 
     <script></script>
     <script src="javascript/script.js"></script>

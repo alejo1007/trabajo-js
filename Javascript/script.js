@@ -1,5 +1,5 @@
-swal("Click on either the button or outside the modal.").then((value) => {
-  swal(`The returned value is: ${value}`);
+swal("Aprieta el boton para continuar").then((value) => {
+  swal(`Muchas gracias.: ${value}`);
 });
 
 //constructor
@@ -21,13 +21,13 @@ Seguro.prototype.cotizarSeguro = function () {
 
   switch (this.marca) {
     case "1":
-      cantidad = base * 1.5;
+      cantidad = base * 1.15;
       break;
     case "2":
-      cantidad = base * 2;
+      cantidad = base * 1.05;
       break;
     case "3":
-      cantidad = base * 2.5;
+      cantidad = base * 1.35;
       break;
   }
 
@@ -36,11 +36,11 @@ Seguro.prototype.cotizarSeguro = function () {
   //cada año de diferencia afeca en 3 %
   cantidad -= (diferencia * 3 * cantidad) / 100;
   /*
-        Si el seguro es Básico * 40% más
+        Si el seguro es Básico * 30% más
         Si el seguro es Completo 50% más
     */
   if (this.tipo === "basico") {
-    cantidad *= 1.4;
+    cantidad *= 1.3;
   } else {
     cantidad *= 1.5;
   }
@@ -75,13 +75,13 @@ Interfaz.prototype.mostrarResultado = function (seguro, total) {
 
   switch (seguro.marca) {
     case "1":
-      marca = "volkswagen";
+      marca = "Americano";
       break;
     case "2":
-      marca = "honda";
+      marca = "Asiático";
       break;
     case "3":
-      marca = "audi";
+      marca = "Europeo";
       break;
   }
 
@@ -252,3 +252,27 @@ var carousel = new bootstrap.Carousel(myCarousel, {
 });
 
 /*----- */
+let divDolar = document.getElementById("divDolar");
+
+document.getElementById("botonDolar").addEventListener("click", () => {
+  fetch("https://criptoya.com/api/dolar")
+    .then((promesa) => promesa.json())
+    .then((data) => {
+      let { oficial, blue, ccb, ccl, mep, solidario } = data;
+      divDolar.innerHTML = `
+            <p>Oficial:$ ${oficial} </p>
+            <p>Solidario:$ ${solidario} </p>
+            <p>Blue:$ ${blue} </p>
+            <p>Contado con Bitcoin:$ ${ccb}</p>
+            <p>Contado con liquidacion:$ ${ccl} </p>
+            <p>Mep: $${mep} </p>
+           
+        `;
+    });
+});
+
+document.getElementById("botonClientes").addEventListener("click", () => {
+  fetch("./json/clientes.json")
+    .then((response) => response.json())
+    .then((data) => console.log(data));
+});
